@@ -9,11 +9,14 @@ namespace IDCI\Bundle\RequestThemeBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use IDCI\Bundle\RequestThemeBundle\DependencyInjection\Compiler\ThemeCompilerPass;
 
 class IDCIRequestThemeBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
+
+        $container->addCompilerPass(new ThemeCompilerPass());
     }
 }
