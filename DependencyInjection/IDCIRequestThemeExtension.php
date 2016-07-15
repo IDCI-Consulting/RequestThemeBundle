@@ -29,6 +29,7 @@ class IDCIRequestThemeExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('rule_assessors.yml');
 
         $container->setParameter('idci_request_theme.configuration', $config);
     }

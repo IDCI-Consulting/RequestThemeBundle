@@ -1,14 +1,39 @@
 services:
 
-    idci_request_theme.event_subscriber.theme:
-        class: IDCI\Bundle\RequestThemeBundle\EventSubscriber\ThemeEventSubscriber
-        tags:
-            - { name: kernel.event_subscriber }
+    # Rule assessor
+    idci_request_theme.rule_assessor_registry:
+        class: IDCI\Bundle\RequestThemeBundle\RuleAssessor\RuleAssessorRegistry
 
+    idci_request_theme.rule_assessor_manager:
+        class: IDCI\Bundle\RequestThemeBundle\RuleAssessor\RuleAssessorManager
+        arguments: [@idci_request_theme.rule_assessor_registry]
+
+
+    # Theme
     idci_request_theme.theme_registry:
         class: IDCI\Bundle\RequestThemeBundle\Theme\ThemeRegistry
+
+    idci_request_theme.theme_manager:
+        class: IDCI\Bundle\RequestThemeBundle\Theme\ThemeManager
+        arguments:
+            - @idci_request_theme.theme_registry
+            - @idci_request_theme.rule_assessor_manager
 
     idci_request_theme.theme:
         class: IDCI\Bundle\RequestThemeBundle\Theme\Theme
         arguments: [null, null, null]
         abstract: true
+
+    idci_request_theme.event_subscriber.theme:
+        class: IDCI\Bundle\RequestThemeBundle\EventSubscriber\ThemeEventSubscriber
+        arguments: [@idci_request_theme.theme_manager, @twig.loader]
+        tags:
+            - { name: kernel.event_subscriber }
+
+
+    # Twig
+    idci_request_theme.twig.theme_extension:
+        class: IDCI\Bundle\RequestThemeBundle\Twig\ThemeTwigExtension
+        arguments: [@idci_request_theme.theme_manager]
+        tags:
+            - { name: twig.extension }

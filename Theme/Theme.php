@@ -57,4 +57,20 @@ class Theme implements ThemeInterface
     {
         return $this->rules;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplatePath()
+    {
+        return sprintf('%s/views', $this->getPath());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPublicPath()
+    {
+        return sprintf('%s/public', $this->getPath());
+    }
 }

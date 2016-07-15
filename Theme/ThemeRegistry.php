@@ -45,6 +45,14 @@ class ThemeRegistry implements ThemeRegistryInterface
     /**
      * {@inheritdoc}
      */
+    public function getThemes()
+    {
+        return $this->themes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasTheme($alias)
     {
         if (!isset($this->themes[$alias])) {

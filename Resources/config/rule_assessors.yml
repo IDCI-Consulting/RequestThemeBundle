@@ -1,0 +1,7 @@
+services:
+
+    # Rule assessors list
+    idci_request_theme.rule_assessor.request:
+        class: IDCI\Bundle\RequestThemeBundle\RuleAssessor\RequestRuleAssessor
+        tags:
+            - { name: idci_request_theme.rule_assessor, alias: request }

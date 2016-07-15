@@ -32,6 +32,13 @@ interface ThemeRegistryInterface
     public function getTheme($alias);
 
     /**
+     * Returns all themes.
+     *
+     * @return array.
+     */
+    public function getThemes();
+
+    /**
      * Returns whether the given theme is supported.
      *
      * @param string $alias The alias of the theme.

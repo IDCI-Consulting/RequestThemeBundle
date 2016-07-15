@@ -9,6 +9,8 @@ namespace IDCI\Bundle\RequestThemeBundle\Theme;
 
 interface ThemeInterface
 {
+    const TEMPLATE_NAMESPACE = "theme";
+
     /**
      * Returns the theme alias.
      *
@@ -29,4 +31,18 @@ interface ThemeInterface
      * @return array
      */
     public function getRules();
+
+    /**
+     * Returns the template path
+     *
+     * @param string
+     */
+    public function getTemplatePath();
+
+    /**
+     * Returns the public path
+     *
+     * @param string
+     */
+    public function getPublicPath();
 }

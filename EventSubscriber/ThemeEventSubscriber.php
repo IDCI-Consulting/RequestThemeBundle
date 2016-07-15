@@ -10,9 +10,36 @@ namespace IDCI\Bundle\RequestThemeBundle\EventSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
+use IDCI\Bundle\RequestThemeBundle\Theme\ThemeManager;
 
 class ThemeEventSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var ThemeManager
+     */
+    private $themeManager;
+
+    /**
+     * @var FilesystemLoader
+     */
+    private $twigLoader;
+
+    /**
+     * Constructor
+     *
+     * @param ThemeManager     $themeManager
+     * @param FilesystemLoader $twigLoader
+     */
+    public function __construct(
+        ThemeManager     $themeManager,
+        FilesystemLoader $twigLoader
+    )
+    {
+        $this->themeManager = $themeManager;
+        $this->twigLoader   = $twigLoader;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -32,7 +59,13 @@ class ThemeEventSubscriber implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
+        $theme   = $this->themeManager->guessTheme($request);
 
-        var_dump($request->getHttpHost()); die;
+        if (null !== $theme) {
+            $this->twigLoader->addPath(
+                $theme->getTemplatePath(),
+                $theme::TEMPLATE_NAMESPACE
+            );
+        }
     }
 }
