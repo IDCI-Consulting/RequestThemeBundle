@@ -38,6 +38,11 @@ class ThemeTwigExtension extends \Twig_Extension
                 array($this, 'themePath'),
                 array('is_safe' => array('html', 'js'))
             ),
+            new \Twig_SimpleFunction(
+                'theme_asset',
+                array($this, 'themeAsset'),
+                array('is_safe' => array('html', 'js'))
+            ),
         );
     }
 
@@ -59,5 +64,17 @@ class ThemeTwigExtension extends \Twig_Extension
     public function themePath($path)
     {
         return $this->themeManager->getTemplate($path);
+    }
+
+    /**
+     * Returns the full asset path
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public function themeAsset($path)
+    {
+        return $this->themeManager->getAsset($path);
     }
 }

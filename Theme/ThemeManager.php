@@ -39,7 +39,7 @@ class ThemeManager
     }
 
     /**
-     * Returns full template path
+     * Returns full theme template path
      *
      * @param string $path
      */
@@ -54,6 +54,20 @@ class ThemeManager
             ThemeInterface::TEMPLATE_NAMESPACE,
             $path
         );
+    }
+
+    /**
+     * Returns full theme asset path
+     *
+     * @param string $path
+     */
+    public static function getAsset($path)
+    {
+        if (!is_string($path)) {
+            throw new UnexpectedTypeException($path, 'string');
+        }
+
+        return $path;
     }
 
     /**
