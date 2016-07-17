@@ -24,6 +24,11 @@ class ThemeManager
     private $ruleAssessorManager;
 
     /**
+     * @var ThemeInterface
+     */
+    private $currentTheme;
+
+    /**
      * Constructor
      *
      * @param ThemeRegistryInterface $registry
@@ -36,6 +41,7 @@ class ThemeManager
     {
         $this->registry            = $registry;
         $this->ruleAssessorManager = $ruleAssessorManager;
+        $this->currentTheme        = null;
     }
 
     /**
@@ -43,7 +49,7 @@ class ThemeManager
      *
      * @param string $path
      */
-    public static function getTemplate($path)
+    public function getTemplate($path)
     {
         if (!is_string($path)) {
             throw new UnexpectedTypeException($path, 'string');
@@ -61,13 +67,17 @@ class ThemeManager
      *
      * @param string $path
      */
-    public static function getAsset($path)
+    public function getAsset($path)
     {
         if (!is_string($path)) {
             throw new UnexpectedTypeException($path, 'string');
         }
 
-        return $path;
+        return sprintf(
+            '/themes/%s/%s',
+            strtolower($this->currentTheme->getAlias()),
+            $path
+        );
     }
 
     /**
@@ -81,6 +91,8 @@ class ThemeManager
     {
         foreach ($this->registry->getThemes() as $theme) {
             if ($this->match($theme, $request)) {
+                $this->currentTheme = $theme;
+
                 return $theme;
             }
         }

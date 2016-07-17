@@ -62,6 +62,7 @@ class ThemeEventSubscriber implements EventSubscriberInterface
         $theme   = $this->themeManager->guessTheme($request);
 
         if (null !== $theme) {
+            // Add theme path to twig loader
             $this->twigLoader->addPath(
                 $theme->getTemplatePath(),
                 $theme::TEMPLATE_NAMESPACE
