@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ * @author:  Brahim Boukoufallah <brahim.boukoufallah@idci-consulting.fr>
  * @license: MIT
  */
 
@@ -42,6 +43,16 @@ class ThemeManager
         $this->registry            = $registry;
         $this->ruleAssessorManager = $ruleAssessorManager;
         $this->currentTheme        = null;
+    }
+
+    /**
+     * Get current theme
+     *
+     * @return ThemeInterface|null
+     */
+    public function getCurrentTheme()
+    {
+        return $this->currentTheme;
     }
 
     /**
@@ -119,5 +130,25 @@ class ThemeManager
         }
 
         return true;
+    }
+
+    /**
+     * Return the full namespaced current theme template path
+     *
+     * @param string $templatePath
+     *
+     * @return string
+     */
+    public function getNamespacedTemplatePath($templatePath)
+    {
+        if (null === $this->getCurrentTheme()) {
+            return $templatePath;
+        }
+
+        return sprintf(
+            '@%s/%s',
+            ThemeInterface::TEMPLATE_NAMESPACE,
+            $templatePath
+        );
     }
 }
