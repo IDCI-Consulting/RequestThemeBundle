@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ * @author:  Brahim Boukoufallah <brahim.boukoufallah@idci-consulting.fr>
  * @license: MIT
  */
 
@@ -37,23 +38,21 @@ class RequestRuleAssessor extends AbstractRuleAssessor
                 'charsets'       => null,
 
             ))
-            ->setAllowedTypes(array(
-                'client_ips'     => array('null', 'array'),
-                'client_ip'      => array('null', 'string'),
-                'script_name'    => array('null', 'string'),
-                'path_info'      => array('null', 'string'),
-                'base_path'      => array('null', 'string'),
-                'base_url'       => array('null', 'string'),
-                'scheme'         => array('null', 'string'),
-                'port'           => array('null', 'string'),
-                'http_host'      => array('null', 'string'),
-                'request_format' => array('null', 'string'),
-                'content_type'   => array('null', 'string'),
-                'default_locale' => array('null', 'string'),
-                'locale'         => array('null', 'string'),
-                'languages'      => array('null', 'array'),
-                'charsets'       => array('null', 'array'),
-            ))
+            ->setAllowedTypes('client_ips',     array('null', 'array'))
+            ->setAllowedTypes('client_ip',      array('null', 'string'))
+            ->setAllowedTypes('script_name',    array('null', 'string'))
+            ->setAllowedTypes('path_info',      array('null', 'string'))
+            ->setAllowedTypes('base_path',      array('null', 'string'))
+            ->setAllowedTypes('base_url',       array('null', 'string'))
+            ->setAllowedTypes('scheme',         array('null', 'string'))
+            ->setAllowedTypes('port',           array('null', 'string'))
+            ->setAllowedTypes('http_host',      array('null', 'string'))
+            ->setAllowedTypes('request_format', array('null', 'string'))
+            ->setAllowedTypes('content_type',   array('null', 'string'))
+            ->setAllowedTypes('default_locale', array('null', 'string'))
+            ->setAllowedTypes('locale',         array('null', 'string'))
+            ->setAllowedTypes('languages',      array('null', 'array'))
+            ->setAllowedTypes('charsets',       array('null', 'array'))
         ;
     }
 
