@@ -28,20 +28,21 @@ class ThemeCompilerPass implements CompilerPassInterface
         $registryDefinition = $container->getDefinition('idci_request_theme.theme_registry');
         $configuration = $container->getParameter('idci_request_theme.configuration');
 
-        foreach ($configuration['themes'] as $alias => $themeConfiguration) {
+        foreach ($configuration['themes'] as $name => $themeConfiguration) {
             $serviceDefinition = new DefinitionDecorator('idci_request_theme.theme');
-            $serviceName = sprintf('idci_request_theme.theme.%s', $alias);
+            $serviceName = sprintf('idci_request_theme.theme.%s', $name);
 
             $serviceDefinition->isAbstract(false);
-            $serviceDefinition->replaceArgument(0, $alias);
-            $serviceDefinition->replaceArgument(1, $themeConfiguration['path']);
-            $serviceDefinition->replaceArgument(2, $themeConfiguration['rules']);
+            $serviceDefinition->replaceArgument(0, $name);
+            $serviceDefinition->replaceArgument(1, $themeConfiguration['alias']);
+            $serviceDefinition->replaceArgument(2, $themeConfiguration['path']);
+            $serviceDefinition->replaceArgument(3, $themeConfiguration['rules']);
 
             $container->setDefinition($serviceName, $serviceDefinition);
 
             $registryDefinition->addMethodCall(
                 'setTheme',
-                array($alias, new Reference($serviceName))
+                array($name, new Reference($serviceName))
             );
         }
     }

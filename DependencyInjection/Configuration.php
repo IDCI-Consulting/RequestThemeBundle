@@ -35,6 +35,7 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('id')
                     ->prototype('array')
                         ->children()
+                            ->scalarNode('alias')->defaultNull()->end()
                             ->scalarNode('path')->isRequired()->end()
                             ->arrayNode('rules')
                                 ->defaultValue(array())->prototype('variable')->end()

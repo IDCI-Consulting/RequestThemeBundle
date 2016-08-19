@@ -12,6 +12,13 @@ interface ThemeInterface
     const TEMPLATE_NAMESPACE = "theme";
 
     /**
+     * Returns the theme name.
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
      * Returns the theme alias.
      *
      * @return string

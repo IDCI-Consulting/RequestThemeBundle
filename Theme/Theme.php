@@ -27,8 +27,9 @@ class Theme implements ThemeInterface
     /**
      * Constructor
      */
-    public function __construct($alias, $path, array $rules = array())
+    public function __construct($name, $alias = null, $path, array $rules = array())
     {
+        $this->name  = $name;
         $this->alias = $alias;
         $this->path  = $path;
         $this->rules = $rules;
@@ -37,8 +38,20 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAlias()
     {
+        if (null === $this->alias) {
+            return $this->getName();
+        }
+
         return $this->alias;
     }
 

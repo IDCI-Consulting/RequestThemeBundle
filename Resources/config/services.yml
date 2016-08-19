@@ -21,7 +21,7 @@ services:
 
     idci_request_theme.theme:
         class: IDCI\Bundle\RequestThemeBundle\Theme\Theme
-        arguments: [null, null, null]
+        arguments: [null, null, null, null]
         abstract: true
 
     idci_request_theme.event_subscriber.theme:

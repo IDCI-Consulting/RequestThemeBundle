@@ -80,6 +80,7 @@ class ThemeEventSubscriber implements EventSubscriberInterface
         if (null !== $this->themeManager->getCurrentTheme()) {
             $response = $event->getResponse();
             $response->headers->set('X-Theme-Alias', $this->themeManager->getCurrentTheme()->getAlias());
+            $response->headers->set('X-Theme-Name', $this->themeManager->getCurrentTheme()->getName());
         }
     }
 }
